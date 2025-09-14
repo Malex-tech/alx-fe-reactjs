@@ -1,30 +1,41 @@
 // src/App.jsx
-import React, { useEffect } from 'react';
-import AddRecipeForm from './components/AddRecipeForm';
-import RecipeList from './components/RecipeList';
-import { useRecipeStore } from './stores/recipeStore';
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-function App() {
-  const setRecipes = useRecipeStore((s) => s.setRecipes);
+import RecipeList from "./components/RecipeList";
+import AddRecipeForm from "./components/AddRecipeForm";
+import RecipeDetails from "./components/RecipeDetails";
+import EditRecipeForm from "./components/EditRecipeForm";
 
-  useEffect(() => {
-    // starter recipes so the UI isn't empty at first
-    const starter = [
-      { id: '1', title: 'Jollof Rice', description: 'Smoky tomato rice — Nigerian classic.' },
-      { id: '2', title: 'Fried Plantain', description: 'Sweet & caramelized; serve hot.' }
-    ];
-    setRecipes(starter);
-  }, [setRecipes]);
-
+const App = () => {
   return (
-    <main style={{ maxWidth: 760, margin: '40px auto', padding: 16 }}>
-      <h1>Recipe Sharing App</h1>
-      <AddRecipeForm />
-      <hr />
-      <RecipeList />
-    </main>
+    <BrowserRouter>
+      <header style={{ padding: 12 }}>
+        <Link to="/">Home</Link>
+        {" | "}
+        <Link to="/">Recipes</Link>
+      </header>
+
+      <main style={{ padding: 12 }}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <h1>Recipe Sharing App</h1>
+                <AddRecipeForm />
+                <RecipeList />
+              </>
+            }
+          />
+          <Route path="/recipes/:id" element={<RecipeDetails />} />
+          <Route path="/recipes/:id/edit" element={<EditRecipeForm />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
+
 
