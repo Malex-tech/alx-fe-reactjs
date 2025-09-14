@@ -1,13 +1,34 @@
 // src/App.jsx
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
+import React, { useEffect } from 'react';
+import useRecipeStore from './components/recipeStore';
+import SearchBar from './components/SearchBar';
+import RecipeList from './components/RecipeList';
 import RecipeList from "./components/RecipeList";
 import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeDetails from "./components/RecipeDetails";
 import EditRecipeForm from "./components/EditRecipeForm";
 
 const App = () => {
+  const setRecipes = useRecipeStore((state) => state.setRecipes);
+
+  useEffect(() => {
+    // Example: preload with some recipes
+    setRecipes([
+      { id: 1, title: 'Spaghetti Bolognese', description: 'Classic Italian pasta.' },
+      { id: 2, title: 'Avocado Toast', description: 'Simple, quick breakfast.' },
+    ]);
+  }, [setRecipes]);
+
+  return (
+    <div className="p-6">
+      <h1 className="text-3xl font-bold text-center mb-4">🍳 Recipe Sharing App</h1>
+      <SearchBar />
+      <RecipeList />
+    </div>
+  );
+
   return (
     <BrowserRouter>
       <header style={{ padding: 12 }}>
