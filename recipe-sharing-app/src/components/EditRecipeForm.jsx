@@ -30,9 +30,16 @@ const EditRecipeForm = () => {
     );
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateRecipe({ id, title: title.trim(), description });
+  const handleSubmit = (event) => {
+    event.preventDefault(); // ✅ now uses `event.preventDefault`
+    if (!title.trim()) return;
+
+    updateRecipe(id, {
+      title: title.trim(),
+      description: description.trim(),
+      updatedAt: new Date().toISOString(),
+    });
+
     navigate(`/recipes/${id}`);
   };
 
