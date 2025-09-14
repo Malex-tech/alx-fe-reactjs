@@ -5,6 +5,8 @@ const useRecipeStore = create((set, get) => ({
   recipes: [],
   searchTerm: '',
   filteredRecipes: [],
+  favorites: [],
+  recommendations: [],
   
  // Actions
   setRecipes: (newRecipes) => set({ recipes: newRecipes, filteredRecipes: newRecipes }),
@@ -27,6 +29,7 @@ const useRecipeStore = create((set, get) => ({
     const updatedRecipes = [...get().recipes, recipe];
     set({ recipes: updatedRecipes });
     get().filterRecipes();
+    get().generateRecommendations();
   },
 
     // Delete by id
@@ -34,6 +37,36 @@ const useRecipeStore = create((set, get) => ({
     const updatedRecipes = get().recipes.filter((r) => r.id !== id);
     set({ recipes: updatedRecipes });
     get().filterRecipes();
+    get().generateRecommendations();
+  },
+
+  // NEW: Favorites
+  addFavorite: (recipeId) => {
+    if (!get().favorites.includes(recipeId)) {
+      set((state) => ({ favorites: [...state.favorites, recipeId] }));
+      get().generateRecommendations();
+    }
+  },
+
+  removeFavorite: (recipeId) => {
+    set((state) => ({
+      favorites: state.favorites.filter((id) => id !== recipeId),
+    }));
+    get().generateRecommendations();
+  },
+
+  // NEW: Recommendation logic (basic mock)
+  generateRecommendations: () => {
+    const { recipes, favorites } = get();
+    const recommended = recipes.filter(
+      (recipe) =>
+        favorites.includes(recipe.id) ||
+        recipe.title
+          .toLowerCase()
+          .includes(favorites.length > 0 ? 'chicken' : '')
+    );
+
+    set({ recommendations: recommended.slice(0, 3) }); // Top 3 suggestions
   },
 
   // Update recipe by id: pass an object with id + updated fields

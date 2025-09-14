@@ -16,6 +16,7 @@ const RecipeList = () => {
         <div key={recipe.id} className="p-4 border rounded shadow">
           <h3 className="text-lg font-semibold">{recipe.title}</h3>
           <p className="text-gray-600">{recipe.description}</p>
+          <FavoriteButton recipeId={recipe.id} />
         </div>
       ))}
     </div>

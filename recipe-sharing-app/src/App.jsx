@@ -9,6 +9,8 @@ import RecipeList from "./components/RecipeList";
 import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeDetails from "./components/RecipeDetails";
 import EditRecipeForm from "./components/EditRecipeForm";
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
 
 const App = () => {
   const setRecipes = useRecipeStore((state) => state.setRecipes);
@@ -26,6 +28,8 @@ const App = () => {
       <h1 className="text-3xl font-bold text-center mb-4">🍳 Recipe Sharing App</h1>
       <SearchBar />
       <RecipeList />
+      <RecommendationsList />
+      <FavoritesList />
     </div>
   );
 
