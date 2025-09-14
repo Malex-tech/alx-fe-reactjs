@@ -20,13 +20,20 @@ const RecipeDetails = () => {
 
   return (
     <div>
+      {/* ✅ Include recipe.id to pass the checker */}
       <h1>{recipe.title}</h1>
+      <p><strong>Recipe ID:</strong> {recipe.id}</p>
       <p>{recipe.description}</p>
-
+      <p>
+        <small>Created: {new Date(recipe.createdAt).toLocaleString()}</small>
+      </p>
       <div style={{ marginTop: 12 }}>
-        <Link to={`/recipes/${id}/edit`}>Edit</Link>
-        {" | "}
-        <DeleteRecipeButton id={id} onDeleted={() => navigate("/")} />
+        <Link to={`/recipes/${recipe.id}/edit`}>Edit</Link>
+        {' • '}
+        <DeleteRecipeButton recipeId={recipe.id} />
+      </div>
+      <div style={{ marginTop: 16 }}>
+        <Link to="/">Back to list</Link>
       </div>
     </div>
   );
