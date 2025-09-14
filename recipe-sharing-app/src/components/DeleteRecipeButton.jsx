@@ -1,19 +1,23 @@
 // src/components/DeleteRecipeButton.jsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecipeStore } from "./recipeStore";
 
 const DeleteRecipeButton = ({ id, onDeleted }) => {
-  const deleteRecipe = useRecipeStore((s) => s.deleteRecipe);
+    const navigate = useNavigate();
+    const deleteRecipe = useRecipeStore((state) => state.deleteRecipe);
 
   const handleDelete = () => {
-    if (!confirm("Delete this recipe? This cannot be undone.")) return;
-    deleteRecipe(id);
-    if (typeof onDeleted === "function") onDeleted();
+    deleteRecipe(recipeId);
+    navigate("/"); // Redirect to home after deleting
   };
 
   return (
-    <button onClick={handleDelete} style={{ marginLeft: 8 }}>
-      Delete
+    <button
+      onClick={handleDelete}
+      className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+    >
+      Delete Recipe
     </button>
   );
 };
