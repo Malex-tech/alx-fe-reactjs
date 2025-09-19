@@ -20,7 +20,7 @@ export default function Search() {
       setUser(data);
     } catch (err) {
       cconsole.error("API Error:", err);
-      setError("Looks like we can’t find the user.");
+      setError("Looks like we can’t find the user");
     } finally {
       setLoading(false);
     }
