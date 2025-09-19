@@ -9,6 +9,7 @@ export default function Search() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!username.trim()) return;
     setLoading(true);
     setError(null);
@@ -18,7 +19,7 @@ export default function Search() {
       const data = await fetchUserData(username);
       setUser(data);
     } catch (err) {
-      console.error(err);
+      cconsole.error("API Error:", err);
       setError("Looks like we can’t find the user.");
     } finally {
       setLoading(false);
@@ -27,6 +28,7 @@ export default function Search() {
 
   return (
     <div className="max-w-md mx-auto mt-8 p-4 rounded-xl shadow-md bg-white">
+      {/* Search Form */}
       <form onSubmit={handleSubmit} className="flex gap-2 mb-4">
         <input
           type="text"
@@ -43,6 +45,7 @@ export default function Search() {
         </button>
       </form>
 
+       {/* Conditional Rendering */}
       {loading && <p className="text-center text-gray-600">Loading...</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
       {user && (
