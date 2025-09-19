@@ -19,7 +19,7 @@ export default function Search() {
       const data = await fetchUserData(username);
       setUser(data);
     } catch (err) {
-      cconsole.error("API Error:", err);
+      console.error("API Error:", err);
       setError("Looks like we can’t find the user");
     } finally {
       setLoading(false);
@@ -45,7 +45,7 @@ export default function Search() {
         </button>
       </form>
 
-       {/* Conditional Rendering */}
+      {/* Conditional Rendering */}
       {loading && <p className="text-center text-gray-600">Loading...</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
       {user && (
