@@ -69,6 +69,12 @@ export default function Search() {
           <h3 className="mt-2 text-xl font-semibold">
             {userData.name || userData.login}
           </h3>
+
+          {/* ✅ Show location if available */}
+          {userData.location && (
+            <p className="text-gray-600 text-sm mt-1">{userData.location}</p>
+          )}
+          
           <a
             href={userData.html_url}
             target="_blank"
