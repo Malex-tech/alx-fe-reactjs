@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { fetchUserData } from "../services/githubService";
+import { fetchUserData, fetchUserRepos } from "../services/githubService";
 
 export default function Search() {
   const [username, setUsername] = useState("");
   const [userData, setUserData] = useState(null);
+  const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -15,10 +16,15 @@ export default function Search() {
     setLoading(true);
     setError("");
     setUserData(null);
+    setRepos([]);
 
     try {
       const data = await fetchUserData(q);
       setUserData(data);
+
+      // Fetch repos if user is found
+      const repoData = await fetchUserRepos(q);
+      setRepos(repoData);
     } catch (err) {
       setError("Looks like we cant find the user");
     } finally {
@@ -71,6 +77,25 @@ export default function Search() {
           >
             View Profile
           </a>
+
+          {/* Repos section */}
+          {repos.length > 0 && (
+            <ul className="mt-4 space-y-2 text-left">
+              <h4 className="text-lg font-bold mb-2">Public Repositories</h4>
+              {repos.map((repo) => (
+                <li key={repo.id} className="border-b pb-2">
+                  <a
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
+                    {repo.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
     </div>
