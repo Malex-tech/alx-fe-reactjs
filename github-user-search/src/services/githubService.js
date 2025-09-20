@@ -34,3 +34,9 @@ export async function fetchUserData(username) {
     throw new Error("Error fetching user data.");
   }
 }
+
+export const fetchUserRepos = async (username) => {
+  const response = await fetch(`https://api.github.com/users/${username}/repos`);
+  if (!response.ok) throw new Error("Failed to fetch repos");
+  return await response.json();
+};
