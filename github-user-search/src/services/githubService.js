@@ -9,7 +9,9 @@ export async function fetchAdvancedUserSearch(username, location, minRepos) {
     if (location) query += `location:${location} `;
     if (minRepos) query += `repos:>=${minRepos} `;
 
-    const response = await axios.get(`https://api.github.com/search/users?q=${query.trim()}`);
+    const response = await axios.get(
+      `https://api.github.com/search/users?q=${query.trim()}`
+    );
 
     if (response.data.items.length === 0) {
       throw new Error("No users match your search criteria.");
@@ -21,5 +23,14 @@ export async function fetchAdvancedUserSearch(username, location, minRepos) {
       throw new Error("Rate limit exceeded. Try again later.");
     }
     throw new Error("Something went wrong while fetching data.");
+  }
+}
+
+export async function fetchUserData(username) {
+  try {
+    const response = await axios.get(`https://api.github.com/users/${username}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching user data.");
   }
 }
