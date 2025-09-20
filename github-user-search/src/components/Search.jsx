@@ -1,4 +1,3 @@
-// src/components/Search.jsx
 import React, { useState } from "react";
 import { fetchUserData } from "../services/githubService";
 
@@ -12,6 +11,7 @@ export default function Search() {
     e.preventDefault();
     const q = username.trim();
     if (!q) return;
+
     setLoading(true);
     setError("");
     setUserData(null);
@@ -20,7 +20,6 @@ export default function Search() {
       const data = await fetchUserData(q);
       setUserData(data);
     } catch (err) {
-      // Task requirement: show this exact message on error
       setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
@@ -29,25 +28,47 @@ export default function Search() {
 
   return (
     <div className="search-wrapper">
-      <form onSubmit={handleSubmit} className="search-form">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 w-full max-w-md"
+      >
         <input
           type="text"
           placeholder="Search GitHub username..."
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          aria-label="GitHub username"
+          className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button type="submit" disabled={loading}>Search</button>
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-blue-600 text-white rounded-lg py-2 hover:bg-blue-700 transition"
+        >
+          Search
+        </button>
       </form>
 
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {loading && <p className="mt-4 text-gray-600">Loading...</p>}
+      {error && <p className="mt-4 text-red-500">{error}</p>}
 
       {userData && (
-        <div className="user-card">
-          <img src={userData.avatar_url} alt={userData.login} width="96" height="96" />
-          <h3>{userData.name || userData.login}</h3>
-          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
+        <div className="mt-6 p-4 bg-white shadow rounded-lg text-center">
+          <img
+            src={userData.avatar_url}
+            alt={userData.login}
+            width="96"
+            height="96"
+            className="mx-auto rounded-full"
+          />
+          <h3 className="mt-2 text-xl font-semibold">
+            {userData.name || userData.login}
+          </h3>
+          <a
+            href={userData.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:underline"
+          >
             View Profile
           </a>
         </div>
