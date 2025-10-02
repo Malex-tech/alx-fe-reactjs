@@ -5,7 +5,6 @@ import React, { useEffect } from 'react';
 import useRecipeStore from './components/recipeStore';
 import SearchBar from './components/SearchBar';
 import RecipeList from './components/RecipeList';
-import RecipeList from "./components/RecipeList";
 import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeDetails from "./components/RecipeDetails";
 import EditRecipeForm from "./components/EditRecipeForm";
