@@ -10,4 +10,3 @@ module.exports = {
   },
   plugins: [], // Add plugins here (like forms, typography, etc.)
 }
-
