@@ -1,12 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // Tell Tailwind which files to scan for class names
   content: [
-    "./index.html",
+    "./public/index.html",     // ✅ include public folder index.html
+    "./index.html",            // ✅ include root index.html (for Vite/other setups)
     "./src/**/*.{js,jsx,ts,tsx}", 
   ],
   theme: {
-    extend: {}, // Put your custom theme settings here (colors, fonts, spacing, etc.)
+    extend: {},
   },
-  plugins: [], // Add plugins here (like forms, typography, etc.)
+  plugins: [],
 }
