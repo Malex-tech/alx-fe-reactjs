@@ -1,7 +1,6 @@
 // src/App.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import React, { useEffect } from 'react';
 import useRecipeStore from './components/recipeStore';
 import SearchBar from './components/SearchBar';
 import RecipeList from './components/RecipeList';
@@ -23,32 +22,24 @@ const App = () => {
   }, [setRecipes]);
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold text-center mb-4">🍳 Recipe Sharing App</h1>
-      <SearchBar />
-      <RecipeList />
-      <RecommendationsList />
-      <FavoritesList />
-    </div>
-  );
-
-  return (
     <BrowserRouter>
-      <header style={{ padding: 12 }}>
-        <Link to="/">Home</Link>
-        {" | "}
-        <Link to="/">Recipes</Link>
+      <header className="p-4 bg-gray-100 flex gap-4">
+        <Link to="/" className="text-blue-600 hover:underline">Home</Link>
+        <Link to="/recipes" className="text-blue-600 hover:underline">Recipes</Link>
       </header>
 
-      <main style={{ padding: 12 }}>
+      <main className="p-6">
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <h1>Recipe Sharing App</h1>
+                <h1 className="text-3xl font-bold text-center mb-4">🍳 Recipe Sharing App</h1>
+                <SearchBar />
                 <AddRecipeForm />
                 <RecipeList />
+                <RecommendationsList />
+                <FavoritesList />
               </>
             }
           />
@@ -61,5 +52,3 @@ const App = () => {
 };
 
 export default App;
-
-
