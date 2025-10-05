@@ -1,4 +1,30 @@
 import React, { useState, useEffect } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
+
+const recipes = [
+  {
+    id: 2,
+    title: "Chicken Tikka Masala",
+    summary:
+      "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
+    image: "https://via.placeholder.com/300x200",
+  },
+  {
+    id: 3,
+    title: "Avocado Toast",
+    summary:
+      "Toasted sourdough topped with creamy avocado, poached eggs, and a sprinkle of chili flakes.",
+    image: "https://via.placeholder.com/300x200",
+  },
+  {
+    id: 4,
+    title: "Beef Stir Fry",
+    summary:
+      "Tender beef slices with fresh vegetables tossed in a savory soy-garlic sauce.",
+    image: "https://via.placeholder.com/300x200",
+  },
+];
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
