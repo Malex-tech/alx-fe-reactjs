@@ -3,24 +3,97 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://via.placeholder.com/300x200"
+    "image": "https://via.placeholder.com/300x200",
+    "ingredients": ["200g spaghetti", "100g pancetta", "2 eggs", "50g parmesan cheese", "Black pepper"],
+    "cooking instructions": [
+      "Boil the pasta until al dente.",
+      "Fry the pancetta until crispy.",
+      "Mix eggs and cheese in a bowl.",
+      "Combine everything and season with pepper."
+    ]
   },
+ {
+  "id": 2,
+  "title": "Chicken Tikka Masala",
+  "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
+  "image": "https://via.placeholder.com/300x200",
+  "ingredients": [
+    "500g boneless chicken (cut into cubes)",
+    "1 cup plain yogurt",
+    "2 tbsp lemon juice",
+    "2 tbsp tikka masala spice mix",
+    "2 tbsp butter",
+    "1 large onion (finely chopped)",
+    "3 cloves garlic (minced)",
+    "1 tbsp ginger paste",
+    "400g canned tomatoes (pureed)",
+    "1 cup heavy cream",
+    "Salt and pepper to taste",
+    "Fresh coriander for garnish"
+  ],
+  "cooking instructions": [
+    "In a bowl, combine yogurt, lemon juice, and tikka masala spice. Marinate the chicken for at least 1 hour.",
+    "Grill or pan-sear the chicken pieces until lightly charred and set aside.",
+    "In a pan, melt butter and sauté onions until golden brown.",
+    "Add garlic and ginger paste; cook until fragrant.",
+    "Stir in the tomato puree and simmer for 10 minutes.",
+    "Add cream, salt, and pepper, then mix in the grilled chicken.",
+    "Simmer for another 10–15 minutes until the sauce thickens.",
+    "Garnish with fresh coriander and serve with rice or naan."
+  ]
+},
   {
-    "id": 2,
-    "title": "Chicken Tikka Masala",
-    "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
-    "image": "https://via.placeholder.com/300x200"
-  },
+  "id": 3,
+  "title": "Avocado Toast",
+  "summary": "Toasted sourdough topped with creamy avocado, poached eggs, and a sprinkle of chili flakes.",
+  "image": "https://via.placeholder.com/300x200",
+  "ingredients": [
+    "2 slices of sourdough bread",
+    "1 ripe avocado",
+    "2 eggs",
+    "1 tbsp white vinegar (for poaching)",
+    "Salt and black pepper to taste",
+    "Chili flakes (optional)",
+    "Lemon juice (optional)",
+    "Olive oil for drizzling"
+  ],
+  "cooking instructions": [
+    "Toast the sourdough slices until golden and crisp.",
+    "Halve the avocado, remove the pit, and mash the flesh in a bowl with salt, pepper, and a little lemon juice.",
+    "Bring a pot of water to a gentle simmer and add vinegar.",
+    "Crack eggs into the water and poach for 3–4 minutes until whites are set but yolks are runny.",
+    "Spread mashed avocado over the toast.",
+    "Top each with a poached egg.",
+    "Sprinkle with chili flakes and drizzle with olive oil before serving."
+  ]
+},
   {
-    "id": 3,
-    "title": "Avocado Toast",
-    "summary": "Toasted sourdough topped with creamy avocado, poached eggs, and a sprinkle of chili flakes.",
-    "image": "https://via.placeholder.com/300x200"
-  },
-  {
-    "id": 4,
-    "title": "Beef Stir Fry",
-    "summary": "Tender beef slices with fresh vegetables tossed in a savory soy-garlic sauce.",
-    "image": "https://via.placeholder.com/300x200"
-  }
+  "id": 4,
+  "title": "Beef Stir Fry",
+  "summary": "Tender beef slices with fresh vegetables tossed in a savory soy-garlic sauce.",
+  "image": "https://via.placeholder.com/300x200",
+  "ingredients": [
+    "400g beef sirloin (thinly sliced)",
+    "2 tbsp soy sauce",
+    "1 tbsp cornstarch",
+    "1 tbsp oyster sauce",
+    "1 tbsp sesame oil",
+    "2 cloves garlic (minced)",
+    "1 red bell pepper (sliced)",
+    "1 cup broccoli florets",
+    "1 medium carrot (sliced)",
+    "2 tbsp vegetable oil",
+    "1 tbsp fresh ginger (grated)",
+    "Cooked rice for serving"
+  ],
+  "cooking instructions": [
+    "In a bowl, mix beef with soy sauce and cornstarch; let marinate for 15 minutes.",
+    "Heat vegetable oil in a wok or large pan over high heat.",
+    "Add beef and stir-fry until browned. Remove and set aside.",
+    "In the same pan, add garlic, ginger, and vegetables; stir-fry for 3–5 minutes until tender-crisp.",
+    "Return beef to the pan and add oyster sauce and sesame oil.",
+    "Toss everything together for 2–3 minutes.",
+    "Serve hot with steamed rice."
+  ]
+}
 ]
