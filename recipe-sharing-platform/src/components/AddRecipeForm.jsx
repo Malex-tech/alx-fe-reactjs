@@ -4,35 +4,47 @@ const AddRecipeForm = () => {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
+
+  // ✅ Validation function
+  const validate = () => {
+    const newErrors = {};
+
+    if (!title.trim()) newErrors.title = "Recipe title is required.";
+    if (!ingredients.trim())
+      newErrors.ingredients = "Please enter at least two ingredients.";
+    else if (ingredients.split(",").length < 2)
+      newErrors.ingredients = "Add at least two ingredients, separated by commas.";
+    if (!steps.trim()) newErrors.steps = "Preparation steps are required.";
+
+    return newErrors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const validationErrors = validate();
 
-    // Basic validation
-    if (!title || !ingredients || !steps) {
-      setError("Please fill out all fields before submitting.");
+    // If validation fails
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       setSuccess("");
       return;
     }
 
-    const ingredientList = ingredients.split(",").map((i) => i.trim());
-    if (ingredientList.length < 2) {
-      setError("Please include at least two ingredients (separated by commas).");
-      setSuccess("");
-      return;
-    }
+    // If all is good
+    const newRecipe = {
+      title,
+      ingredients: ingredients.split(",").map((i) => i.trim()),
+      steps,
+    };
+    console.log("✅ New Recipe Added:", newRecipe);
 
-    // Simulate submission
-    const newRecipe = { title, ingredients: ingredientList, steps };
-    console.log("New Recipe Submitted:", newRecipe);
-
-    // Reset form
+    // Reset form and messages
     setTitle("");
     setIngredients("");
     setSteps("");
-    setError("");
+    setErrors({});
     setSuccess("Recipe added successfully!");
   };
 
@@ -55,6 +67,9 @@ const AddRecipeForm = () => {
             placeholder="e.g., Spaghetti Bolognese"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+          {errors.title && (
+            <p className="text-red-600 text-sm mt-1">{errors.title}</p>
+          )}
         </div>
 
         {/* Ingredients */}
@@ -69,6 +84,9 @@ const AddRecipeForm = () => {
             rows="4"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           ></textarea>
+          {errors.ingredients && (
+            <p className="text-red-600 text-sm mt-1">{errors.ingredients}</p>
+          )}
         </div>
 
         {/* Steps */}
@@ -83,13 +101,17 @@ const AddRecipeForm = () => {
             rows="4"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           ></textarea>
+          {errors.steps && (
+            <p className="text-red-600 text-sm mt-1">{errors.steps}</p>
+          )}
         </div>
 
-        {/* Error or Success Messages */}
-        {error && <p className="text-red-600 font-medium">{error}</p>}
-        {success && <p className="text-green-600 font-medium">{success}</p>}
+        {/* Success Message */}
+        {success && (
+          <p className="text-green-600 text-center font-medium">{success}</p>
+        )}
 
-        {/* Submit */}
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition"
