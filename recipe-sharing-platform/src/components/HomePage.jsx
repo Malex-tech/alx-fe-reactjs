@@ -73,4 +73,11 @@ const HomePage = () => {
   );
 };
 
+<Link
+  to="/add-recipe"
+  className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition mt-4"
+>
+  + Add New Recipe
+</Link>
+
 export default HomePage;
