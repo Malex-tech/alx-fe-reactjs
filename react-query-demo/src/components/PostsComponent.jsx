@@ -7,18 +7,18 @@ const fetchPosts = async () => {
 };
 
 function PostsComponent() {
-  // ✅ Include `error` in destructuring
   const { data, error, isLoading, isError, isFetching, refetch } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
     refetchOnWindowFocus: true,
     keepPreviousData: true,
+    staleTime: 1000 * 60 * 2, // ✅ data is "fresh" for 2 minutes
+    cacheTime: 1000 * 60 * 5, // ✅ data stays in cache for 5 minutes after unmount
   });
 
   if (isLoading) return <p>Loading posts...</p>;
 
   if (isError) {
-    // ✅ Display the error message explicitly
     return (
       <div style={{ color: 'red', padding: '1rem' }}>
         <p>❌ Error fetching posts:</p>
