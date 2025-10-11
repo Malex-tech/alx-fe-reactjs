@@ -1,26 +1,41 @@
 import { useState } from "react";
 
 const RegistrationForm = () => {
-  // define individual states for controlled inputs
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+
+  // hold individual field errors
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!username.trim()) {
+      newErrors.username = "Username is required";
+    }
+
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+    }
+
+    if (!password.trim()) {
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors);
+
+    // return true if no errors
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // basic validation
-    if (!username || !email || !password) {
-      setError("All fields are required!");
-      return;
-    }
-
-    setError("");
+    if (!validateForm()) return;
 
     const userData = { username, email, password };
 
-    // mock API request
     try {
       const res = await fetch("https://jsonplaceholder.typicode.com/users", {
         method: "POST",
@@ -32,10 +47,11 @@ const RegistrationForm = () => {
       console.log("User registered:", data);
       alert("User registered successfully!");
 
-      // reset fields
+      // reset inputs
       setUsername("");
       setEmail("");
       setPassword("");
+      setErrors({});
     } catch (err) {
       console.error("Error:", err);
     }
@@ -46,6 +62,7 @@ const RegistrationForm = () => {
       <h2 className="text-xl font-bold mb-4">Controlled Registration Form</h2>
 
       <form onSubmit={handleSubmit}>
+        {/* Username */}
         <div className="mb-3">
           <label className="block font-medium mb-1">Username</label>
           <input
@@ -55,8 +72,12 @@ const RegistrationForm = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          {errors.username && (
+            <p className="text-red-500 text-sm">{errors.username}</p>
+          )}
         </div>
 
+        {/* Email */}
         <div className="mb-3">
           <label className="block font-medium mb-1">Email</label>
           <input
@@ -66,8 +87,12 @@ const RegistrationForm = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email}</p>
+          )}
         </div>
 
+        {/* Password */}
         <div className="mb-3">
           <label className="block font-medium mb-1">Password</label>
           <input
@@ -77,9 +102,10 @@ const RegistrationForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password}</p>
+          )}
         </div>
-
-        {error && <p className="text-red-500 text-sm">{error}</p>}
 
         <button
           type="submit"
