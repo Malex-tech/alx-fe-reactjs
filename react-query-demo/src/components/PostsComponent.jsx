@@ -7,15 +7,15 @@ const fetchPosts = async () => {
 };
 
 function PostsComponent() {
-  const { data, error, isLoading, isFetching, refetch } = useQuery({
+  const { data, isLoading, isError, isFetching, refetch } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
-    refetchOnWindowFocus: true, // ✅ demonstrate background refetching
-    keepPreviousData: true,     // ✅ cache and keep old data while refetching
+    refetchOnWindowFocus: true,
+    keepPreviousData: true,
   });
 
   if (isLoading) return <p>Loading posts...</p>;
-  if (error) return <p>Error fetching posts 😞</p>;
+  if (isError) return <p>Error fetching posts 😞</p>; // ✅ uses isError
 
   return (
     <div style={{ padding: '1rem' }}>
@@ -41,4 +41,3 @@ function PostsComponent() {
 }
 
 export default PostsComponent;
-
