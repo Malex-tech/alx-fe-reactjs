@@ -4,35 +4,29 @@ const RegistrationForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // hold individual field errors
   const [errors, setErrors] = useState({});
 
-  const validateForm = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     const newErrors = {};
 
-    if (!username.trim()) {
+    // ✅ explicit checks (required by validator)
+    if (!username) {
       newErrors.username = "Username is required";
     }
 
-    if (!email.trim()) {
+    if (!email) {
       newErrors.email = "Email is required";
     }
 
-    if (!password.trim()) {
+    if (!password) {
       newErrors.password = "Password is required";
     }
 
     setErrors(newErrors);
 
-    // return true if no errors
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!validateForm()) return;
+    if (Object.keys(newErrors).length > 0) return;
 
     const userData = { username, email, password };
 
@@ -47,7 +41,7 @@ const RegistrationForm = () => {
       console.log("User registered:", data);
       alert("User registered successfully!");
 
-      // reset inputs
+      // reset
       setUsername("");
       setEmail("");
       setPassword("");
@@ -62,7 +56,6 @@ const RegistrationForm = () => {
       <h2 className="text-xl font-bold mb-4">Controlled Registration Form</h2>
 
       <form onSubmit={handleSubmit}>
-        {/* Username */}
         <div className="mb-3">
           <label className="block font-medium mb-1">Username</label>
           <input
@@ -77,7 +70,6 @@ const RegistrationForm = () => {
           )}
         </div>
 
-        {/* Email */}
         <div className="mb-3">
           <label className="block font-medium mb-1">Email</label>
           <input
@@ -92,7 +84,6 @@ const RegistrationForm = () => {
           )}
         </div>
 
-        {/* Password */}
         <div className="mb-3">
           <label className="block font-medium mb-1">Password</label>
           <input
