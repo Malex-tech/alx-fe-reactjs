@@ -7,7 +7,8 @@ const fetchPosts = async () => {
 };
 
 function PostsComponent() {
-  const { data, isLoading, isError, isFetching, refetch } = useQuery({
+  // ✅ Include `error` in destructuring
+  const { data, error, isLoading, isError, isFetching, refetch } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
     refetchOnWindowFocus: true,
@@ -15,7 +16,16 @@ function PostsComponent() {
   });
 
   if (isLoading) return <p>Loading posts...</p>;
-  if (isError) return <p>Error fetching posts 😞</p>; // ✅ uses isError
+
+  if (isError) {
+    // ✅ Display the error message explicitly
+    return (
+      <div style={{ color: 'red', padding: '1rem' }}>
+        <p>❌ Error fetching posts:</p>
+        <pre>{error.message}</pre>
+      </div>
+    );
+  }
 
   return (
     <div style={{ padding: '1rem' }}>
