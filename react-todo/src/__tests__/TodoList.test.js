@@ -5,16 +5,16 @@ describe("TodoList Component", () => {
   test("renders initial todos", () => {
     render(<TodoList />);
     expect(screen.getByText("Learn React")).toBeInTheDocument();
-    expect(screen.getByText("Build Projects")).toBeInTheDocument();
+    expect(screen.getByText("Build a Todo App")).toBeInTheDocument();
   });
 
   test("adds a new todo", () => {
     render(<TodoList />);
-    const input = screen.getByTestId("todo-input");
-    const form = screen.getByTestId("add-form");
-
+    const input = screen.getByPlaceholderText("Add a new task");
     fireEvent.change(input, { target: { value: "New Todo" } });
-    fireEvent.submit(form);
+
+    const button = screen.getByText("Add");
+    fireEvent.click(button);
 
     expect(screen.getByText("New Todo")).toBeInTheDocument();
   });
@@ -29,13 +29,11 @@ describe("TodoList Component", () => {
   test("deletes a todo", async () => {
     render(<TodoList />);
     const todo = screen.getByText("Learn React");
-    const deleteButton = todo.nextSibling;
-
+    const deleteButton = screen.getAllByText("Delete")[0];
     fireEvent.click(deleteButton);
 
-    // ⏳ Wait for React to re-render after deletion
-    await waitFor(() => {
-      expect(screen.queryByText("Learn React")).not.toBeInTheDocument();
-    });
+    await waitFor(() =>
+      expect(screen.queryByText("Learn React")).not.toBeInTheDocument()
+    );
   });
 });
