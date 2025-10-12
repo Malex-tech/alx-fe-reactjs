@@ -1,23 +1,24 @@
+import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import TodoList from "../components/TodoList";
 
 describe("TodoList Component", () => {
   test("renders initial todos", () => {
-    render(<TodoList />);
-    expect(screen.getByText("Learn React")).toBeInTheDocument();
-    expect(screen.getByText("Build a Todo App")).toBeInTheDocument();
-  });
+  render(<TodoList />);
+  expect(screen.getByText("Learn React")).toBeInTheDocument();
+  expect(screen.getByText("Build Projects")).toBeInTheDocument();
+});
 
   test("adds a new todo", () => {
-    render(<TodoList />);
-    const input = screen.getByPlaceholderText("Add a new task");
-    fireEvent.change(input, { target: { value: "New Todo" } });
+  render(<TodoList />);
+  const input = screen.getByPlaceholderText("Add todo");
+  fireEvent.change(input, { target: { value: "New Todo" } });
 
-    const button = screen.getByText("Add");
-    fireEvent.click(button);
+  const button = screen.getByText("Add");
+  fireEvent.click(button);
 
-    expect(screen.getByText("New Todo")).toBeInTheDocument();
-  });
+  expect(screen.getByText("New Todo")).toBeInTheDocument();
+});
 
   test("toggles todo completion", () => {
     render(<TodoList />);
