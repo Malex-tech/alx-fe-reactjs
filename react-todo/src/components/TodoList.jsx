@@ -32,14 +32,13 @@ export default function TodoList() {
   return (
     <div style={{ padding: "2rem" }}>
       <h2>Todo List</h2>
-
-      <form onSubmit={handleAddTodo} data-testid="add-form">
+      <form data-testid="add-form" onSubmit={handleAddTodo}>
         <input
-          type="text"
+          data-testid="todo-input"
           placeholder="Add todo"
+          type="text"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
-          data-testid="todo-input"
         />
         <button type="submit">Add</button>
       </form>
@@ -58,14 +57,13 @@ export default function TodoList() {
             {todo.text}
             <button
               onClick={(e) => {
-                e.stopPropagation();
+                e.stopPropagation(); // 🚫 prevents toggle firing when Delete is clicked
                 handleDelete(todo.id);
               }}
               style={{
                 marginLeft: "1rem",
                 background: "crimson",
                 color: "white",
-                border: "none",
                 borderRadius: "4px",
                 cursor: "pointer",
               }}
@@ -78,4 +76,3 @@ export default function TodoList() {
     </div>
   );
 }
-
