@@ -4,5 +4,8 @@ export default {
     "^.+\\.(js|jsx)$": "babel-jest"
   },
   moduleFileExtensions: ["js", "jsx"],
-  setupFilesAfterEnv: ["@testing-library/jest-dom"]
+  setupFilesAfterEnv: ["@testing-library/jest-dom"],
+  moduleNameMapper: {
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy" // <- mock CSS files
+  }
 };
